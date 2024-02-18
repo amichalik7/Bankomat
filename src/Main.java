@@ -69,7 +69,7 @@ public class Main {
     public static void przelew_4(int nr, KontoBankowe[] konta) {
         System.out.print("Ile chcesz przelac? ");
         Scanner sc = new Scanner(System.in);
-        Double ile = sc.nextDouble();
+        double ile = sc.nextDouble();
         if (konta[nr].getSaldo() < ile) {
             System.out.println("Nie masz wystaraczojących środków");
         } else {
