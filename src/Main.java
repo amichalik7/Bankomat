@@ -35,6 +35,9 @@ public class Main {
                 case 6:
                     zakoncz = true;
                     break;
+                default:
+                    System.out.println("Bledny wybor.");
+                    break;
             }
 
         }
