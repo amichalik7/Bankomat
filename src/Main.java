@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) {
         KontoBankowe[] konta = {new KontoBankowe(1, 1234), new KontoBankowe(2, 2222), new KontoBankowe(3, 3345)};
         Scanner sc = new Scanner(System.in);
-        int nr = -1;
-        nr = logowanie(nr, konta);
+        int nr;
+        nr = logowanie(konta);
         boolean zakoncz = false;
         do {
             System.out.println("1. Saldo");
@@ -30,7 +30,7 @@ public class Main {
                     przelew_4(nr, konta);
                     break;
                 case 5:
-                    nr = logowanie(nr, konta);
+                    nr = logowanie(konta);
                     break;
                 case 6:
                     zakoncz = true;
@@ -88,11 +88,11 @@ public class Main {
         }
     }
 
-    public static int logowanie(int nr, KontoBankowe[] konta) {
+    public static int logowanie(KontoBankowe[] konta) {
         System.out.print("Podaj kod pin: ");
         Scanner sc = new Scanner(System.in);
         int pin = sc.nextInt();
-        nr = -1;
+        int nr = -1;
         boolean znaleziono = false;
         for (int i = 0; i < konta.length; i++) {
             if (konta[i].getPin() == pin) {
