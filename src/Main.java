@@ -57,7 +57,9 @@ public class Main {
     public static void wplata_2(int nr, KontoBankowe[] konta) {
         System.out.print("Ile chcesz wplacic? ");
         Scanner sc = new Scanner(System.in);
-        konta[nr].wplac(sc.nextInt());
+        int ile = sc.nextInt();
+        konta[nr].wplac(ile);
+        System.out.println("Wplacono " + ile + ". Saldo po wplacie wynosi " + konta[nr].getSaldo() + "." );
     }
 
     public static void wyplata_3(int nr, KontoBankowe[] konta) {
@@ -69,18 +71,20 @@ public class Main {
             System.out.println("Nie masz wystaraczojących środków");
         } else {
             konta[nr].wyplac(ile);
+            System.out.println("Wyplacono " + ile + ". Saldo po wyplacie wynosi " + konta[nr].getSaldo() + "." );
         }
     }
 
     public static void przelew_4(int nr, KontoBankowe[] konta) {
         System.out.print("Ile chcesz przelac? ");
         Scanner sc = new Scanner(System.in);
-        Double ile2 = sc.nextDouble();
-        if (konta[nr].getSaldo() < ile2) {
+        Double ile = sc.nextDouble();
+        if (konta[nr].getSaldo() < ile) {
             System.out.println("Nie masz wystaraczojących środków");
         } else {
             System.out.print("Na ktore konto? ");
-            przelew(ile2, sc.nextInt(), konta, nr);
+            przelew(ile, sc.nextInt(), konta, nr);
+            System.out.println("Przelano " + ile + ". Saldo po transakcji wynosi " + konta[nr].getSaldo() + "." );
         }
     }
 
