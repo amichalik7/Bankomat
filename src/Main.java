@@ -41,15 +41,6 @@ public class Main {
         while (!zakoncz);
     }
 
-    public static void przelew(double kwota, int id, KontoBankowe[] konta, int nr) {
-        for (int i = 0; i < konta.length; i++) {
-            if (konta[i].getId() == id) {
-                konta[nr].zmienSaldo(-kwota);
-                konta[i].zmienSaldo(kwota);
-            }
-        }
-    }
-
     public static void saldo_1(int nr, KontoBankowe[] konta) {
         System.out.println("Twoje saldo wynosi: " + konta[nr].getSaldo());
     }
@@ -59,7 +50,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int ile = sc.nextInt();
         konta[nr].wplac(ile);
-        System.out.println("Wplacono " + ile + ". Saldo po wplacie wynosi " + konta[nr].getSaldo() + "." );
+        System.out.println("Wplacono " + ile + ". Saldo po wplacie wynosi " + konta[nr].getSaldo() + ".");
     }
 
     public static void wyplata_3(int nr, KontoBankowe[] konta) {
@@ -71,7 +62,7 @@ public class Main {
             System.out.println("Nie masz wystaraczojących środków");
         } else {
             konta[nr].wyplac(ile);
-            System.out.println("Wyplacono " + ile + ". Saldo po wyplacie wynosi " + konta[nr].getSaldo() + "." );
+            System.out.println("Wyplacono " + ile + ". Saldo po wyplacie wynosi " + konta[nr].getSaldo() + ".");
         }
     }
 
@@ -83,8 +74,21 @@ public class Main {
             System.out.println("Nie masz wystaraczojących środków");
         } else {
             System.out.print("Na ktore konto? ");
-            przelew(ile, sc.nextInt(), konta, nr);
-            System.out.println("Przelano " + ile + ". Saldo po transakcji wynosi " + konta[nr].getSaldo() + "." );
+            int id = sc.nextInt();
+            boolean przelano = false;
+            for (KontoBankowe konto : konta) {
+                if (konto.getId() == id) {
+                    konta[nr].zmienSaldo(-ile);
+                    konto.zmienSaldo(ile);
+                    przelano = true;
+                }
+            }
+            if (przelano) {
+                System.out.println("Przelano " + ile + ". Saldo po transakcji wynosi " + konta[nr].getSaldo() + ".");
+            } else {
+                System.out.println("Nie odnaleziono konta o nr " + id + ". Przelew nie zostal wykonany.");
+            }
+
         }
     }
 
